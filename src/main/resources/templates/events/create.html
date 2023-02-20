@@ -9,12 +9,14 @@
     <form method="post" action="/events/create">
         <div class="form-group md-3">
             <label>Name
-                <input class="form-control" type="text" name="eventName">
+                <input class="form-control" type="text" name="name">
+                <!-- Note: The name field must match the Event object property-->
             </label>
         </div>
         <div class="form-group md-3">
             <label>Description
-                <input class="form-control" type="text" name="eventDescription">
+                <input class="form-control" type="text" name="description">
+                <!-- Note: The description field must match the Event object property-->
             </label>
         </div>
         <div class="form-group">
