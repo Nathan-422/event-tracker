@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("events")
 public class EventController {
@@ -20,7 +17,7 @@ public class EventController {
 
     @GetMapping
     public String displayAllEvents(Model model) {
-        model.addAttribute("events", EventData.getEvents());
+        model.addAttribute("events", EventData.getAll());
         return "events/index";
     }
 
@@ -37,6 +34,28 @@ public class EventController {
     {
         EventData.add(new Event(eventName, eventDescription));
         return "redirect:";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventForm(@RequestParam(required = false) int[] eventIds) {
+
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+
+        return "redirect:";
+        // takes us back to the page that submitted this
+        // after the colon would be the reletive path, but we just want the same thing, so it's empty
     }
 
 }

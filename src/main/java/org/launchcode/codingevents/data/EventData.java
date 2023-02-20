@@ -12,7 +12,7 @@ public class EventData {
     private static final Map<Integer, Event> events = new HashMap<>();
 
     // get all events
-    public static Collection<Event> getEvents() {
+    public static Collection<Event> getAll() {
         return events.values();
     }
 
