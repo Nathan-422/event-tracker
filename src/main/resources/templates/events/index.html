@@ -20,6 +20,9 @@
 <!--                Note: thymeleaf is set up to reference the getName() function of the above class.-->
 <!--                This is just syntactic sugar built into thymeleaf-->
                 <td th:text="${event.description}"></td>
+                <td>
+                    <a class="btn btn-success" th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
+                </td>
             </tr>
         </thread>
     </table>
