@@ -4,7 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("events")
@@ -19,15 +22,25 @@ public class EventController {
     }
 
     @GetMapping("create")
-    public String renderCreateEventForm() {
+    public String displayCreateEventForm(Model model) {
+        model.addAttribute("field", "Create Event");
+        model.addAttribute(new Event());
         return "events/create";
     }
 
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String processCreateEvent(@ModelAttribute @Valid Event newEvent,
+                                     Errors errors,
+                                     Model model) {
         // Model Binding:
         // with this Model Attribute, spring will look for fields of the Event object
         // and attempt to match those against fields in the form.
+
+        if (errors.hasErrors()) {
+            model.addAttribute("events", EventData.getAll());
+            return "events/create";
+        }
+
         EventData.add(newEvent);
         return "redirect:";
     }
