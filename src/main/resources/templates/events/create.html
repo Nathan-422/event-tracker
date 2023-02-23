@@ -6,26 +6,49 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-    <form method="post" action="/events/create">
-        <div class="mb-3">
-            <label>Name
+    <form class="container-md-8" method="post" action="/events/create">
+        <div class="row mb-3">
+            <div class="col-sm-auto mb-3">
+                <label for="name">Event Name</label>
                 <input th:field="${event.name}" class="form-control">
                 <!-- Note: The name field must match the Event object property-->
-            </label>
-            <p th:errors="${event.name}" class="error"></p>
+                <p th:errors="${event.name}" class="error"></p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label>Description
-                <input class="form-control" th:field="${event.description}">
-                <!-- Note: The description field must match the Event object property-->
-            </label>
-            <p th:errors="${event.description}" class="error"></p>
+        <div class="row mb-3">
+            <div class="col-sm-5 mb-3">
+                <label for="location">Location</label>
+                <input class="form-control" th:field="${event.location}">
+                <p th:errors="${event.location}" class="error"></p>
+            </div>
+            <div class="col-sm-auto mb-3">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" th:field="${event.date}">
+                <p th:errors="${event.date}" class="error"></p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label>Contact Email
+        <div class="row mb-3">
+            <div class="col-sm-5 mb-3">
+                <label for="contactEmail">Contact Email</label>
                 <input class="form-control" th:field="${event.contactEmail}">
-            </label>
-            <p th:errors="${event.contactEmail}" class="error"></p>
+                <p th:errors="${event.contactEmail}" class="error"></p>
+            </div>
+            <div class="col-sm-auto mb-3">
+                <label for="maxAttendance">Maximum attendees</label>
+                <input type="number" class="form-control" th:field="${event.maxAttendance}">
+                <p th:errors="${event.maxAttendance}" class="error"></p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-6"><label for="description">Description</label>
+                <textarea class="form-control col-sm-5" th:field="${event.description}"></textarea>
+                <!-- Note: The description field must match the Event object property-->
+                <p th:errors="${event.description}" class="error"></p></div>
+        </div>
+        <div class="mb-3">
+            <label for="registrationRequired">Registration is required</label>
+            <input class="form-check" type="checkbox" th:field="${event.registrationRequired}">
+            <p th:errors="${event.registrationRequired}" class="error"></p>
         </div>
         <div class="mb-3">
             <input class="btn btn-success" type="submit" value="Create Event">

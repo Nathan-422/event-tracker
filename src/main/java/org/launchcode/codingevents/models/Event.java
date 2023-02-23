@@ -1,8 +1,9 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import org.springframework.cglib.core.Local;
+
+import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Event {
@@ -22,10 +23,35 @@ public class Event {
     @Email(message = "Invalid email. Please try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message = "Location is required")
+    @NotNull(message = "Location is required")
+    private String location;
+
+    @NotNull(message = "Please include whether or not registration is required for this event")
+    private boolean registrationRequired;
+
+    @Min(1)
+    private int maxAttendance;
+
+    @Future(message = "Date cannot be in the past")
+//    @NotNull(message = "A date is required")  // this does not work with LocalDate objects?
+    private LocalDate date;
+
+    public Event(String name,
+                 String description,
+                 String contactEmail,
+                 String location,
+                 Boolean registrationRequired,
+                 int maxAttendance,
+                 LocalDate date
+                ) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.registrationRequired = registrationRequired;
+        this.maxAttendance = maxAttendance;
+        this.date = date;
 
         // create unique IDs
         this.id = nextId;
@@ -33,6 +59,39 @@ public class Event {
     }
 
     public Event() {}
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        LocalDate actualDate = LocalDate.parse(date);
+        this.date = actualDate;
+    }
+
+    public int getMaxAttendance() {
+        return maxAttendance;
+    }
+
+    public void setMaxAttendance(int maxAttendance) {
+        this.maxAttendance = maxAttendance;
+    }
+
+    public boolean isRegistrationRequired() {
+        return registrationRequired;
+    }
+
+    public void setRegistrationRequired(boolean registrationRequired) {
+        this.registrationRequired = registrationRequired;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getContactEmail() {
         return contactEmail;
