@@ -6,6 +6,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Depreciated
+ * This class was a stand in for persistent data storage.
+  */
+
 public class EventData {
 
     // a place to store events
