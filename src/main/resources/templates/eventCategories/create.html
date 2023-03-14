@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+    <h1>Create Event</h1>
+
+    <nav th:replace="fragments :: navigation"></nav>
+    <h2 th:text="${title}"></h2>
+
+    <form method="post" action="create">
+        <div class="mb-3">
+            <label>Name
+                <input th:field="${eventCategory.name}" class="form-control">
+                <!-- Note: The name field must match the Event object property-->
+            </label>
+            <p th:errors="${eventCategory.name}" class="error"></p>
+        </div>
+        <div class="mb-3">
+            <input class="btn btn-success" type="submit" value="Create Event">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+    <h1>Coding Events</h1>
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <h2 th:text="${title}"></h2>
+    <p th:unless="${eventCategories} and ${eventCategories.size()}">No event categories.</p>
+
+    <table class="table table-striped">
+        <thread>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="eventCategory : ${eventCategories}">
+                <td th:text="${eventCategory.id}"></td>
+                <td th:text="${eventCategory.name}"></td>
+<!--                Note: thymeleaf is set up to reference the getName() function of the above class.-->
+<!--                This is just syntactic sugar built into thymeleaf-->
+<!--                    <a class="btn btn-success" th:href="@{/eventCategory/edit/{id}(id=${eventCategory.id})}">Edit</a>-->
+                </td>
+            </tr>
+        </thread>
+    </table>
+
+</body>
+</html>

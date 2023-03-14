@@ -19,25 +19,33 @@ public class EventCategoryController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
+    @GetMapping
+    public String displayAllEventCatagories(Model model) {
+
+        model.addAttribute("title", "All Categories");
+        model.addAttribute("eventCategories", eventCategoryRepository.findAll());
+
+        return "eventCategories/index";
+    }
+
     @GetMapping("create")
-    public String renderCreateEventCategoryForm(Model model) {
+    public String renderCreateEventCategoryForm(@ModelAttribute EventCategory eventCategory,
+                                                Model model) {
 
-        model.addAttribute("Title", "Create Category");
-        model.addAttribute("eventCategory", new EventCategory());
-
+        model.addAttribute("title", "Create Category");
         return "eventCategories/create";
     }
+
+
 
     @PostMapping("create")
     public String processCreateEventCategoryForm(@ModelAttribute EventCategory eventCategory,
                                                  Errors errors,
                                                  Model model) {
 
-        // TODO: 17.4.3.3 This is where I'm stopping. I need to review this more before I continue.
-
+        model.addAttribute("title", "Create Category");
         if (errors.hasErrors()) {
-            model.addAttribute("eventCategories", eventCategoryRepository.findAll());
-            return "events/create";
+            return "eventCategories/create";
         }
 
         eventCategoryRepository.save(eventCategory);
