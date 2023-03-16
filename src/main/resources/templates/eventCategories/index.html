@@ -11,12 +11,12 @@
     <table class="table table-striped">
         <thread>
             <tr>
-                <th>ID</th>
+<!--                <th>ID</th>-->
                 <th>Name</th>
             </tr>
             <tr th:each="eventCategory : ${eventCategories}">
-                <td th:text="${eventCategory.id}"></td>
-                <td th:text="${eventCategory.name}"></td>
+<!--                <td th:text="${eventCategory.id}"></td>-->
+                <td><a th:text="${eventCategory.name}" th:href="'/events?categoryId=' + ${eventCategory.id}"></a></td>
 <!--                Note: thymeleaf is set up to reference the getName() function of the above class.-->
 <!--                This is just syntactic sugar built into thymeleaf-->
 <!--                    <a class="btn btn-success" th:href="@{/eventCategory/edit/{id}(id=${eventCategory.id})}">Edit</a>-->

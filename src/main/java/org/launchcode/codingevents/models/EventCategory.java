@@ -1,14 +1,23 @@
 package org.launchcode.codingevents.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class EventCategory extends AbstractEntity {
 
-    private  String name;
+    @Size(min=3, message="Name must be at least three characters long")
+    private String name;
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    @OneToMany(mappedBy = "eventCategory")
+    private final List<Event> events = new ArrayList<>();
 
     public EventCategory(String name) {
         this.name = name;

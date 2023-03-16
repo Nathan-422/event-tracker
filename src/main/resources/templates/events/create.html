@@ -16,25 +16,27 @@
         </div>
         <div class="mb-3">
             <label>Description
-                <input class="form-control" th:field="${event.description}">
+                <input class="form-control" th:field="${event.eventDetails.description}">
                 <!-- Note: The description field must match the Event object property-->
             </label>
-            <p th:errors="${event.description}" class="error"></p>
+            <p th:errors="${event.eventDetails.description}" class="error"></p>
         </div>
         <div class="mb-3">
             <label>Contact Email
-                <input class="form-control" th:field="${event.contactEmail}">
+                <input class="form-control" th:field="${event.eventDetails.contactEmail}">
             </label>
-            <p th:errors="${event.contactEmail}" class="error"></p>
+            <p th:errors="${event.eventDetails.contactEmail}" class="error"></p>
         </div>
-        <div class="mb-3"><label>Type
-            <select th:field="${event.type}" class="form-control">
-                <option th:each="type : ${types}"
-                        th:value="${type}"
-                        th:text="${type.displayName}"
+        <div class="mb-3"><label>Category
+            <select th:field="${event.eventCategory}" class="form-control">
+                <option th:each="eventCategory : ${categories}"
+                        th:value="${eventCategory.id}"
+                        th:text="${eventCategory.name}"
                 ></option>
             </select>
-        </label></div>
+        </label>
+            <p th:errors="${event.eventCategory}" class="error"></p>
+        </div>
         <div class="mb-3">
             <input class="btn btn-success" type="submit" value="Create Event">
         </div>
