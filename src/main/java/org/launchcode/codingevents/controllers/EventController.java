@@ -139,7 +139,19 @@ public class EventController {
                                       Model model) {
 
         Optional<Event> result = eventRepository.findById(eventDetails);
-        result.ifPresent(event -> model.addAttribute("event", event));
+
+        if (result.isPresent()) {
+            Event event = result.get();
+            model.addAttribute("event", event);
+            model.addAttribute("title", event.getName() + " Details");
+            model.addAttribute("tags", event.getTags());
+        } else {
+            model.addAttribute("title", "Invalid event ID: " + eventDetails);
+        }
+
+//        result.ifPresent(event -> model.addAttribute("event", event));
+
+
 
         return "events/details";
     }

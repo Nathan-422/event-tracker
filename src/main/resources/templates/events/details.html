@@ -23,8 +23,15 @@
             <th>Category</th>
             <td th:text="${event.eventCategory.name}"></td>
         </tr>
+        <tr>
+            <th>Tags</th>
+            <td>
+                <span th:each="tag : ${tags}" th:text="${tag.DisplayName} + ' '"></span>
+            </td>
+        </tr>
     </thread>
 </table>
+<a class="btn btn-secondary" th:href="'add-tag?eventId=' + ${event.id}">Add Tag</a>
 <a class="btn btn-success" th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
 
 </body>
